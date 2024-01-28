@@ -1,66 +1,68 @@
-#include <glut.h>
+#include<iostream>
+#include<glad/glad.h>
+#include<GLFW/glfw3.h>
 
-// test glut
-
-void resize(int width, int height) {
-
-    // avoid div-by-zero
-    if (height == 0) {
-        height = 1;
-    }
-
-    // calculate the aspect ratio
-    float ratio = width * 1.0 / height;
-
-    // put opengl into projection matrix mode
-    glMatrixMode(GL_PROJECTION);
-
-    // reset the matrix
-    glLoadIdentity();
-    // set the viewport
-    glViewport(0, 0, width, height);
-    // set the perspective
-    gluPerspective(45.0f, ratio, 0.1f, 100.0f);
-
-    // put opengl back into modelview mode
-    glMatrixMode(GL_MODELVIEW);
-
-}
-
-void render(void) {
-
-    // just clear the buffers for now
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    // flip the buffers
-    glutSwapBuffers();
-
-}
+int main()
+{
+	// Initialize GLFW
+	glfwInit();
 
 
-int main(int argc, char* argv[]) {
 
-    // initialize glut
-    glutInit(&argc, argv);
+	// Tell GLFW what version of OpenGL we are using 
+	// In this case we are using OpenGL 3.3
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	// Tell GLFW we are using the CORE profile
+	// So that means we only have the modern functions
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    // setup a depth buffer, double buffer and rgba mode
-    glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 
-    // set the windows initial position and size
-    glutInitWindowPosition(50, 50);
-    glutInitWindowSize(320, 240);
 
-    // create the window
-    glutCreateWindow("Test Glut Program");
+	// Create a GLFWwindow object of 800 by 800 pixels, naming it "YoutubeOpenGL"
+	GLFWwindow* window = glfwCreateWindow(800, 800, "YoutubeOpenGL", NULL, NULL);
+	// Error check if the window fails to create
+	if (window == NULL)
+	{
+		std::cout << "Failed to create GLFW window" << std::endl;
+		glfwTerminate();
+		return -1;
+	}
+	// Introduce the window into the current context
+	glfwMakeContextCurrent(window);
 
-    // register the callbacks to glut
-    glutDisplayFunc(render);
-    glutReshapeFunc(resize);
-    glutIdleFunc(render);
 
-    // run the program
-    glutMainLoop();
 
-    return 0;
+	//Load GLAD so it configures OpenGL
+	gladLoadGL();
+	// Specify the viewport of OpenGL in the Window
+	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
+	glViewport(0, 0, 800, 800);
+
+
+
+	// Specify the color of the background
+	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+	// Clean the back buffer and assign the new color to it
+	glClear(GL_COLOR_BUFFER_BIT);
+	// Swap the back buffer with the front buffer
+	glfwSwapBuffers(window);
+
+
+
+	// Main while loop
+	while (!glfwWindowShouldClose(window))
+	{
+		// Take care of all GLFW events
+		glfwPollEvents();
+	}
+
+
+
+	// Delete window before ending the program
+	glfwDestroyWindow(window);
+	// Terminate GLFW before ending the program
+	glfwTerminate();
+	return 0;
 
 }
