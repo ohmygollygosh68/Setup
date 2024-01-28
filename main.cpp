@@ -1,5 +1,7 @@
 #include <glut.h>
 
+// test glut
+
 void resize(int width, int height) {
 
     // avoid div-by-zero
