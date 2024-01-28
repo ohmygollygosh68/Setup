@@ -178,6 +178,16 @@ copy "$(SolutionDir)Libraries\DLL\glew32.dll" "$(OutDir)"</Command>
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (11).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (2).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (3).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (4).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (5).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (6).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (7).png" />
+    <Image Include="Media\vc2022_solution_properties_screenshots\Screenshot (9).png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
